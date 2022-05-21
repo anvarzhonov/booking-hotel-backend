@@ -8,7 +8,7 @@ import ru.ikbo2019.bookinghotel.rest.dto.HotelDto;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface HotelRepository extends JpaRepository<Hotel, Long> {
+public interface HotelRepository extends JpaRepository<Hotel, Integer> {
 
     @Query(value="select h FROM Hotel h JOIN h.city c WHERE c.name =:name")
     List<Hotel> findAllByName(String name);
@@ -17,5 +17,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Long> {
     List<HotelDto> findAllCountHotelsInCities();
 
 //    @Query(value="select h FROM Hotel h WHERE h.chipestPrice BETWEEN (:min, :max)")
-    List<Hotel> findByChipestPriceBetween(BigDecimal min, BigDecimal max);
+    List<Hotel> findByCityNameAndChipestPriceBetween(String cityName, BigDecimal min, BigDecimal max);
 }
