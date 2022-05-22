@@ -63,7 +63,6 @@ public class SecurityController {
             return new ResponseEntity(new ApiResponse(false, "Email Address already in use!"),
                 HttpStatus.BAD_REQUEST);
         }*/
-
         // Create new user's account
         User user = new User(username,
             signUpRequest.getEmail(),
@@ -77,6 +76,8 @@ public class SecurityController {
             .orElseThrow(() -> new BusinessException("Default User Role not found in DB."));
 
         user.setRoles(Set.of(userRole));
+
+        userRepository.save(user);
 
         log.info("Registration successfully!");
 
